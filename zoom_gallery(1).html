@@ -113,7 +113,7 @@
         imageUrl: "https://raw.githubusercontent.com/YLZCOMPANY/jacs3/95d3d3d3650229d5e1b0b046ab06f0f24b4e5eca/%D8%A2%DB%8C%D9%86%D9%87%20S3.png"
       }
     ];
-   
+
     let userFavorites = new Map();
     let currentFilter = "همه";
     let searchQuery = "";
@@ -245,7 +245,7 @@
       const favoriteLabel = config.favorite_label || defaultConfig.favorite_label;
       const footerText = config.footer_text || defaultConfig.footer_text;
 
-      const categories = ["همه", "تاشو", "برقی",];
+      const categories = ["همه", "تاشو", "برقی", "خود��و"];
       
       const filteredMirrors = referenceMirrors.filter(mirror => {
         const matchesFilter = currentFilter === "همه" || mirror.category === currentFilter;
@@ -479,6 +479,9 @@
           added_date: existingFavorite.addedDate || new Date().toISOString()
         });
         
+        if (!result.isOk) {
+          showToast("خطا در به���روزرسانی", "error");
+        }
       } else {
         const result = await window.dataSdk.create({
           mirror_id: mirrorId,
@@ -486,7 +489,10 @@
           notes: "",
           added_date: new Date().toISOString()
         });
-       
+        
+        if (!result.isOk) {
+          showToast("خطا در ذخیره‌سازی", "error");
+        }
       }
     }
 
@@ -526,4 +532,3 @@
   </script>
  <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9adcf27ce4c0dcc9',t:'MTc2NTcwNzQwMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
-
